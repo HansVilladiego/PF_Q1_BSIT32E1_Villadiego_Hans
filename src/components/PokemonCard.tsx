@@ -1,4 +1,5 @@
 import type { Pokemon } from '../types';
+import './PokemonCard.css';
 
 interface Props {
   pokemon: Pokemon;
@@ -6,11 +7,23 @@ interface Props {
 
 export default function PokemonCard({ pokemon }: Props) {
   return (
-    <div style={{ border: '2px solid #ccc', padding: '20px', borderRadius: '10px', textAlign: 'center' }}>
-      <h2>#{pokemon.id} — {pokemon.name.toUpperCase()}</h2>
-      <img src={pokemon.imageUrl} alt={pokemon.name} width="150" />
-      <p><strong>Height:</strong> {pokemon.height}</p>
-      <p><strong>Weight:</strong> {pokemon.weight}</p>
+    <div className="card">
+      <div className="card-glow" />
+      <div className="card-id">#{String(pokemon.id).padStart(3, '0')}</div>
+      <h2 className="card-name">{pokemon.name}</h2>
+      <div className="card-image-wrapper">
+        <img src={pokemon.imageUrl} alt={pokemon.name} className="card-image" />
+      </div>
+      <div className="card-stats">
+        <div className="card-stat">
+          <div className="card-stat-label">HEIGHT</div>
+          <div className="card-stat-value">{pokemon.height / 10}m</div>
+        </div>
+        <div className="card-stat">
+          <div className="card-stat-label">WEIGHT</div>
+          <div className="card-stat-value">{pokemon.weight / 10}kg</div>
+        </div>
+      </div>
     </div>
   );
 }
